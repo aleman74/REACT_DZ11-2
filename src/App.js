@@ -1,24 +1,34 @@
-import logo from './logo.svg';
+import React from "react";
+import { Provider } from 'react-redux';
+import {BrowserRouter, Route, Routes, Navigate} from "react-router-dom";
+import rootReducer from './store/store';
+
 import './App.css';
+import List from "./components/List";
+import Item from "./components/Item";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <BrowserRouter>
+          <Provider store={rootReducer}>
+              <div id="container">
+
+                  <Routes>
+
+                     <Route
+                        path="/"
+                        element={<Navigate to="/services" replace />}
+                     />
+
+                     <Route path='/services' element={<List />} />
+                     <Route path='/services/:id' element={<Item />} />
+
+                  </Routes>
+
+              </div>
+          </Provider>
+      </BrowserRouter>
   );
 }
 
